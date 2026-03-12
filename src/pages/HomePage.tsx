@@ -189,7 +189,7 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute top-0 right-0 w-[80%] h-[75%] rounded-lg overflow-hidden glass-dark p-2 z-10 shadow-2xl skew-y-2 transform origin-top-right"
+                className="absolute top-0 right-0 w-[80%] h-[75%] rounded-lg overflow-hidden glass-dark p-2 z-10 skew-y-2 transform origin-top-right shadow-none"
               >
                 <img src="/Untitled-design-14.png" alt="Commercial Roofing" className="w-full h-full object-cover filter contrast-125 saturate-50" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/60 to-transparent mix-blend-multiply"></div>
@@ -200,7 +200,7 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute bottom-10 left-0 w-[60%] h-[50%] rounded-lg overflow-hidden glass p-2 z-20 shadow-[0_30px_60px_rgba(0,0,0,0.8)] -skew-y-1 transform origin-bottom-left"
+                className="absolute bottom-10 left-0 w-[60%] h-[50%] rounded-lg overflow-hidden glass p-2 z-20 -skew-y-1 transform origin-bottom-left shadow-none"
               >
                 <img src="/Untitled-design-2024-01-19T185616.379.png" alt="Residential Team" className="w-full h-full object-cover filter grayscale opacity-90 hover:grayscale-0 transition-all duration-700" />
               </motion.div>
@@ -211,7 +211,7 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.6 }}
-                className="absolute top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/2 z-30 glass-dark border border-white/20 p-6 rounded-2xl flex flex-col items-center shadow-2xl backdrop-blur-xl"
+                className="absolute top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/2 z-30 glass-dark border border-white/20 p-6 rounded-2xl flex flex-col items-center backdrop-blur-xl shadow-none"
               >
                 <span className="text-5xl font-display font-bold text-[#3375C9] mb-1">10+</span>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-white/70 font-bold whitespace-nowrap">Years of Mastery</span>
@@ -283,32 +283,51 @@ export default function HomePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-                  className="group relative h-[450px] rounded-xl overflow-hidden glass-dark border border-white/5 hover:border-white/20 transition-all duration-500 cursor-pointer"
+                  className="group relative h-[450px] cursor-pointer shadow-none"
+                  style={{ perspective: "1000px" }}
                 >
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700 filter grayscale group-hover:grayscale-0"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
-                  
-                  <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end h-full">
-                    <div className="w-12 h-12 rounded bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 border border-white/10 group-hover:bg-[#004AAC] group-hover:border-[#004AAC] transition-colors duration-500">
-                      <Icon className="w-6 h-6 text-white" />
+                  <div
+                    className="w-full h-full relative transition-transform duration-700 ease-in-out group-hover:[transform:rotateY(180deg)]"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    {/* Front of Card */}
+                    <div
+                      className="absolute inset-0 rounded-xl overflow-hidden glass-dark border border-white/5 shadow-none"
+                      style={{ backfaceVisibility: "hidden" }}
+                    >
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="absolute inset-0 w-full h-full object-cover opacity-60 filter grayscale transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+                      
+                      <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end h-full">
+                        <div className="w-12 h-12 rounded bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 border border-white/10">
+                          <Icon className="w-6 h-6 text-white" />
+                        </div>
+                        <h3 className="text-2xl font-display font-medium text-white tracking-wide">{service.title}</h3>
+                      </div>
                     </div>
-                    <h3 className="text-2xl font-display font-medium text-white mb-3 tracking-wide">{service.title}</h3>
-                    <div className="h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 overflow-hidden transition-all duration-500">
-                      <p className="text-white/60 font-light text-sm mb-6 max-w-[90%] border-l border-[#004AAC] pl-4">
+
+                    {/* Back of Card */}
+                    <div
+                      className="absolute inset-0 rounded-xl overflow-hidden bg-[#004AAC] border border-[#3375C9] p-8 flex flex-col justify-center items-center text-center shadow-none"
+                      style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+                    >
+                      <Icon className="w-12 h-12 text-white mb-6" />
+                      <h3 className="text-2xl font-display font-medium text-white mb-4 tracking-wide">{service.title}</h3>
+                      <p className="text-white/90 font-light text-sm mb-8 leading-relaxed">
                         {service.description}
                       </p>
+                      <NavLink
+                        to={service.link}
+                        className="px-6 py-3 bg-white text-[#004AAC] rounded-full font-bold uppercase tracking-widest text-xs flex items-center gap-2 hover:bg-white/90 transition-colors"
+                      >
+                        Explore Details
+                        <ArrowRight className="w-4 h-4" />
+                      </NavLink>
                     </div>
-                    
-                    <NavLink
-                      to={service.link}
-                      className="absolute bottom-8 right-8 w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-300"
-                    >
-                      <ArrowRight className="w-4 h-4" />
-                    </NavLink>
                   </div>
                 </motion.div>
               );
