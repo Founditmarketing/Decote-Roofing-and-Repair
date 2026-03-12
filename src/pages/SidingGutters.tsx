@@ -34,13 +34,15 @@ export default function SidingGuttersPage() {
           transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 relative"
         >
-          <div className="relative h-[400px] md:h-[600px] w-full rounded-2xl overflow-hidden glass-dark border border-white/10 p-2 shadow-2xl">
-            <img
-              src="/Siding-Gutters-1.png"
-              alt="Siding Integration"
-              className="w-full h-full object-cover rounded-xl filter grayscale opacity-60 mix-blend-luminosity hover:grayscale-0 transition-all duration-1000"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent"></div>
+          <div className="relative h-[400px] md:h-[600px] w-full rounded-2xl overflow-hidden glass-dark border border-white/10 p-2 shadow-2xl group">
+            <div className="w-full h-full rounded-xl overflow-hidden relative">
+              <img
+                src="/Siding-Gutters-1.png"
+                alt="Siding Integration"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent pointer-events-none"></div>
+            </div>
           </div>
         </motion.div>
       </section>
