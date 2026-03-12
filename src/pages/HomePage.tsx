@@ -191,8 +191,8 @@ export default function HomePage() {
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute top-0 right-0 w-[80%] h-[75%] rounded-lg overflow-hidden glass-dark p-2 z-10 skew-y-2 transform origin-top-right shadow-none"
               >
-                <img src="/Untitled-design-14.png" alt="Commercial Roofing" className="w-full h-full object-cover filter contrast-125 saturate-50" />
-                <div className="absolute inset-0 bg-gradient-to-tr from-black/60 to-transparent mix-blend-multiply"></div>
+                <img src="/Untitled-design-14.png" alt="Commercial Roofing" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent mix-blend-multiply"></div>
               </motion.div>
 
               <motion.div
@@ -202,7 +202,7 @@ export default function HomePage() {
                 transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute bottom-10 left-0 w-[60%] h-[50%] rounded-lg overflow-hidden glass p-2 z-20 -skew-y-1 transform origin-bottom-left shadow-none"
               >
-                <img src="/Untitled-design-2024-01-19T185616.379.png" alt="Residential Team" className="w-full h-full object-cover filter grayscale opacity-90 hover:grayscale-0 transition-all duration-700" />
+                <img src="/Untitled-design-2024-01-19T185616.379.png" alt="Residential Team" className="w-full h-full object-cover transition-all duration-700" />
               </motion.div>
               
               {/* Floating Badge */}
@@ -298,9 +298,9 @@ export default function HomePage() {
                       <img
                         src={service.image}
                         alt={service.title}
-                        className="absolute inset-0 w-full h-full object-cover opacity-60 filter grayscale transition-transform duration-700"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                       
                       <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end h-full">
                         <div className="w-12 h-12 rounded bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 border border-white/10">
@@ -472,7 +472,7 @@ export default function HomePage() {
                 <img
                   src={img}
                   alt={`Installation ${index + 1}`}
-                  className="w-full h-full object-cover rounded hover:scale-105 transition-transform duration-700 filter grayscale hover:grayscale-0"
+                  className="w-full h-full object-cover rounded hover:scale-105 transition-transform duration-700"
                   referrerPolicy="no-referrer"
                 />
               </div>
