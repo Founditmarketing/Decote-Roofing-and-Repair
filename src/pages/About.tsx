@@ -46,7 +46,7 @@ export default function AboutPage() {
             <img
               src="/Untitled-design-14.png"
               alt="Ducote Roofing Team"
-              className="w-full h-full object-cover rounded-xl transition-all duration-1000"
+              className="w-full h-full object-cover object-[center_20%] sm:object-[center_30%] rounded-xl transition-all duration-1000"
             />
           </div>
         </motion.div>
