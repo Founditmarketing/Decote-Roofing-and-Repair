@@ -46,9 +46,8 @@ export default function AboutPage() {
             <img
               src="/Untitled-design-14.png"
               alt="Ducote Roofing Team"
-              className="w-full h-full object-cover rounded-xl filter grayscale opacity-80 mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-1000"
+              className="w-full h-full object-cover rounded-xl transition-all duration-1000"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent"></div>
           </div>
         </motion.div>
       </section>
@@ -100,7 +99,7 @@ export default function AboutPage() {
                 <img
                   src="/Commercial.png"
                   alt="Ducote Roofing History"
-                  className="w-full h-full object-cover rounded-xl filter grayscale contrast-125 saturate-50 hover:grayscale-0 transition-all duration-700"
+                  className="w-full h-full object-cover rounded-xl transition-all duration-700"
                 />
               </motion.div>
             </div>
