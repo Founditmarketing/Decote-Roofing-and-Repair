@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle2 } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
 import { cn } from '../utils/cn';
 
 export default function ContactPage() {
@@ -12,13 +12,34 @@ export default function ContactPage() {
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 4000);
-    setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      setIsSubmitted(true);
+      setTimeout(() => setIsSubmitted(false), 4000);
+      setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+    } catch {
+      setSubmitError('Failed to send your message. Please try again or call us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const staggerContainer = {
@@ -165,12 +186,24 @@ export default function ContactPage() {
                     onSubmit={handleSubmit} 
                     className="space-y-8 relative z-10"
                   >
+                    {/* Error Message */}
+                    {submitError && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex items-center gap-3 bg-red-500/10 border border-red-500/30 rounded-xl px-5 py-4"
+                      >
+                        <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
+                        <p className="text-red-300 text-sm font-light">{submitError}</p>
+                      </motion.div>
+                    )}
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       {/* Floating Label Input - Name */}
                       <div className="relative group">
                         <input
                           type="text"
-                          id="name"
+                          id="contact-name"
                           required
                           className="peer w-full bg-transparent border-b border-white/20 text-white py-3 focus:outline-none focus:border-[#3375C9] transition-colors placeholder-transparent font-light"
                           placeholder="Name"
@@ -179,7 +212,7 @@ export default function ContactPage() {
                           onBlur={() => setFocusedField(null)}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         />
-                        <label htmlFor="name" className={cn(
+                        <label htmlFor="contact-name" className={cn(
                           "absolute left-0 transition-all duration-300 pointer-events-none tracking-widest uppercase font-semibold text-xs",
                           (focusedField === 'name' || formData.name) ? "text-[#3375C9] -top-3 text-[10px]" : "text-white/40 top-3 text-sm"
                         )}>
@@ -191,7 +224,7 @@ export default function ContactPage() {
                       <div className="relative group">
                         <input
                           type="tel"
-                          id="phone"
+                          id="contact-phone"
                           required
                           className="peer w-full bg-transparent border-b border-white/20 text-white py-3 focus:outline-none focus:border-[#3375C9] transition-colors placeholder-transparent font-light"
                           placeholder="Phone"
@@ -200,7 +233,7 @@ export default function ContactPage() {
                           onBlur={() => setFocusedField(null)}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         />
-                        <label htmlFor="phone" className={cn(
+                        <label htmlFor="contact-phone" className={cn(
                           "absolute left-0 transition-all duration-300 pointer-events-none tracking-widest uppercase font-semibold text-xs",
                           (focusedField === 'phone' || formData.phone) ? "text-[#3375C9] -top-3 text-[10px]" : "text-white/40 top-3 text-sm"
                         )}>
@@ -213,7 +246,7 @@ export default function ContactPage() {
                     <div className="relative group">
                       <input
                         type="email"
-                        id="email"
+                        id="contact-email"
                         required
                         className="peer w-full bg-transparent border-b border-white/20 text-white py-3 focus:outline-none focus:border-[#3375C9] transition-colors placeholder-transparent font-light"
                         placeholder="Email"
@@ -222,7 +255,7 @@ export default function ContactPage() {
                         onBlur={() => setFocusedField(null)}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       />
-                      <label htmlFor="email" className={cn(
+                      <label htmlFor="contact-email" className={cn(
                         "absolute left-0 transition-all duration-300 pointer-events-none tracking-widest uppercase font-semibold text-xs",
                         (focusedField === 'email' || formData.email) ? "text-[#3375C9] -top-3 text-[10px]" : "text-white/40 top-3 text-sm"
                       )}>
@@ -233,19 +266,19 @@ export default function ContactPage() {
                     {/* Custom Select - Service */}
                     <div className="relative group">
                       <select
-                        id="service"
+                        id="contact-service"
                         required
                         className="w-full bg-transparent border-b border-white/20 text-white py-3 focus:outline-none focus:border-[#3375C9] transition-colors font-light appearance-none cursor-pointer"
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                       >
                         <option value="" disabled hidden className="text-black">Select Objective</option>
-                        <option value="repair" className="text-black">Structural Repair</option>
-                        <option value="new" className="text-black">New Installation (Res/Com)</option>
-                        <option value="metal" className="text-black">Metal Architectures</option>
-                        <option value="other" className="text-black">Other Designation</option>
+                        <option value="Structural Repair" className="text-black">Structural Repair</option>
+                        <option value="New Installation (Res/Com)" className="text-black">New Installation (Res/Com)</option>
+                        <option value="Metal Architectures" className="text-black">Metal Architectures</option>
+                        <option value="Other Designation" className="text-black">Other Designation</option>
                       </select>
-                      <label htmlFor="service" className="absolute left-0 -top-3 text-[#3375C9] text-[10px] tracking-widest uppercase font-semibold pointer-events-none">
+                      <label htmlFor="contact-service" className="absolute left-0 -top-3 text-[#3375C9] text-[10px] tracking-widest uppercase font-semibold pointer-events-none">
                         Mission Parameter
                       </label>
                       <div className="absolute right-0 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none">▼</div>
@@ -254,7 +287,7 @@ export default function ContactPage() {
                     {/* Floating Label Textarea - Message */}
                     <div className="relative group pt-4">
                       <textarea
-                        id="message"
+                        id="contact-message"
                         rows={3}
                         required
                         className="peer w-full bg-white/5 border border-white/10 rounded-xl text-white py-4 px-4 focus:outline-none focus:border-[#3375C9] transition-colors font-light resize-none placeholder-transparent"
@@ -264,7 +297,7 @@ export default function ContactPage() {
                         onBlur={() => setFocusedField(null)}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       ></textarea>
-                      <label htmlFor="message" className={cn(
+                      <label htmlFor="contact-message" className={cn(
                         "absolute left-4 transition-all duration-300 pointer-events-none tracking-widest uppercase font-semibold text-xs bg-[#111111] px-2",
                         (focusedField === 'message' || formData.message) ? "text-[#3375C9] top-1 text-[10px]" : "text-white/40 top-8 text-sm bg-transparent"
                       )}>
@@ -274,12 +307,22 @@ export default function ContactPage() {
 
                     <button
                       type="submit"
-                      className="group relative w-full h-[60px] flex items-center justify-center font-bold tracking-widest uppercase text-sm overflow-hidden rounded-xl bg-white text-black"
+                      disabled={isSubmitting}
+                      className="group relative w-full h-[60px] flex items-center justify-center font-bold tracking-widest uppercase text-sm overflow-hidden rounded-xl bg-white text-black disabled:opacity-70 disabled:cursor-not-allowed"
                     >
                       <div className="absolute inset-x-0 bottom-0 h-0 bg-[#004AAC] group-hover:h-full transition-all duration-300 ease-out z-0"></div>
                       <span className="relative z-10 flex items-center gap-3 group-hover:text-white transition-colors duration-300">
-                        Transmit Request 
-                        <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                        {isSubmitting ? (
+                          <>
+                            Transmitting...
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                          </>
+                        ) : (
+                          <>
+                            Transmit Request 
+                            <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                          </>
+                        )}
                       </span>
                     </button>
                   </motion.form>
