@@ -24,15 +24,18 @@ export default function LeadCaptureForm() {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json().catch(() => null);
+
       if (!response.ok) {
-        throw new Error('Failed to send message');
+        throw new Error(data?.error || 'Failed to send message');
       }
 
       setIsSubmitted(true);
       setTimeout(() => setIsSubmitted(false), 3000);
       setFormData({ name: '', email: '', phone: '', service: 'Roofing Repair' });
-    } catch {
-      setSubmitError('Failed to send. Please try again or call us directly.');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Unknown error';
+      setSubmitError(`Error: ${message}`);
     } finally {
       setIsSubmitting(false);
     }
