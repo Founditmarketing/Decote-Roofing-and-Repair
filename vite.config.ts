@@ -31,7 +31,7 @@ export default defineConfig(({mode}) => {
               req.on('end', () => {
                 const body = JSON.parse(Buffer.concat(chunks).toString());
                 const resendBody = JSON.stringify({
-                  from: 'Ducote Roofing <onboarding@resend.dev>',
+                  from: 'Ducote Roofing <hello@ducoteroofing.com>',
                   to: 'caleb.ducoteroofing@gmail.com',
                   reply_to: body.email,
                   subject: `New Contact: ${body.name} — ${body.service}`,
