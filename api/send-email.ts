@@ -72,7 +72,7 @@ export default async function handler(req: Request) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'hello@ducoteroofing.com',
+        from: 'Ducote Roofing <onboarding@resend.dev>',
         to: 'caleb.ducoteroofing@gmail.com',
         reply_to: email,
         subject: `New Contact: ${name} — ${service}`,
@@ -84,8 +84,8 @@ export default async function handler(req: Request) {
 
     if (!response.ok) {
       console.error('Resend API error:', data);
-      return new Response(JSON.stringify({ error: 'Failed to send email' }), {
-        status: 500,
+      return new Response(JSON.stringify({ error: data?.message || 'Failed to send email', details: data }), {
+        status: response.status,
         headers: { 'Content-Type': 'application/json' },
       });
     }
