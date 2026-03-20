@@ -72,7 +72,7 @@ export default async function handler(req: Request) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Ducote Roofing <hello@ducoteroofing.com>',
+        from: 'Ducote Roofing <hello@ducoteroofingandrepair.com>',
         to: 'caleb.ducoteroofing@gmail.com',
         reply_to: email,
         subject: `New Contact: ${name} — ${service}`,
