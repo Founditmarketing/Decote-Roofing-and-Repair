@@ -2,6 +2,8 @@ import { motion } from 'motion/react';
 import { Home, ShieldCheck, Wrench, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { cn } from '../utils/cn';
+import PageSEO from '../components/PageSEO';
+import { buildServiceSchema } from '../lib/business';
 
 export default function RoofingGeneralPage() {
   const textRevealVariants = {
@@ -11,6 +13,12 @@ export default function RoofingGeneralPage() {
 
   return (
     <div className="bg-[#050505] min-h-screen text-white overflow-hidden py-32">
+      <PageSEO
+        title="General Roofing Systems | Ducote Roofing & Repair"
+        description="Comprehensive roof replacement, repair, and maintenance for residential and commercial properties in Alexandria, LA. Built to withstand the elements."
+        path="/roofing-general"
+        schema={buildServiceSchema('General Roofing', '/roofing-general')}
+      />
       {/* Premium Hero Section */}
       <section className="relative pt-20 pb-24 lg:pt-32 lg:pb-32 text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

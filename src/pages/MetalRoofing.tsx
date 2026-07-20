@@ -2,6 +2,8 @@ import { motion } from 'motion/react';
 import { Hammer, ShieldCheck, Wrench, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { cn } from '../utils/cn';
+import PageSEO from '../components/PageSEO';
+import { buildServiceSchema } from '../lib/business';
 
 export default function MetalRoofingPage() {
   const textRevealVariants = {
@@ -11,6 +13,12 @@ export default function MetalRoofingPage() {
 
   return (
     <div className="bg-[#050505] min-h-screen text-white overflow-hidden py-32">
+      <PageSEO
+        title="Metal Roofing | Ducote Roofing & Repair — Alexandria, LA"
+        description="High-gauge standing seam and corrugated metal roofing systems built for hurricane-grade wind resistance and lasting thermal efficiency."
+        path="/metal-roofing"
+        schema={buildServiceSchema('Metal Roofing Installation', '/metal-roofing')}
+      />
       {/* Premium Hero Section */}
       <section className="relative pt-20 pb-24 lg:pt-32 lg:pb-32 text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

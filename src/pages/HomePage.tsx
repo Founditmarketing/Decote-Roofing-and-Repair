@@ -6,6 +6,8 @@ import {
   Droplets, Hammer, Factory, ArrowRight, Star
 } from 'lucide-react';
 import { cn } from '../utils/cn';
+import PageSEO from '../components/PageSEO';
+import { buildLocalBusinessSchema } from '../lib/business';
 
 export default function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -91,6 +93,12 @@ export default function HomePage() {
 
   return (
     <div className="bg-[#050505] min-h-screen text-white overflow-hidden selection:bg-[#004AAC] selection:text-white">
+      <PageSEO
+        title="Ducote Roofing & Repair | Roofing Contractor in Alexandria, LA"
+        description="Ducote Roofing & Repair offers premium residential and commercial roofing, siding, and steel fabrication services in Alexandria, LA. Trusted since 2012."
+        path="/"
+        schema={buildLocalBusinessSchema()}
+      />
 
       {/* Hero Section */}
       <section ref={containerRef} className="relative h-screen flex items-center justify-center overflow-hidden">

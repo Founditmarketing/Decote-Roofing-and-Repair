@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
 import { cn } from '../utils/cn';
+import PageSEO from '../components/PageSEO';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -57,6 +58,11 @@ export default function ContactPage() {
 
   return (
     <div className="bg-[#050505] min-h-screen text-white overflow-hidden py-32">
+      <PageSEO
+        title="Contact Us | Ducote Roofing & Repair — Alexandria, LA"
+        description="Get a free roofing estimate from Ducote Roofing & Repair. Call 318-880-6777 or send a message to schedule your consultation today."
+        path="/contact"
+      />
       {/* Abstract Background */}
       <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-[#004AAC] rounded-full blur-[150px] opacity-[0.07]"></div>

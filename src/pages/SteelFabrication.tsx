@@ -2,6 +2,8 @@ import { motion } from 'motion/react';
 import { Factory, ShieldCheck, Wrench, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { cn } from '../utils/cn';
+import PageSEO from '../components/PageSEO';
+import { buildServiceSchema } from '../lib/business';
 
 export default function SteelFabricationPage() {
   const textRevealVariants = {
@@ -11,6 +13,12 @@ export default function SteelFabricationPage() {
 
   return (
     <div className="bg-[#050505] min-h-screen text-white overflow-hidden py-32">
+      <PageSEO
+        title="Steel Fabrication | Ducote Roofing & Repair — Alexandria, LA"
+        description="In-house steel fabrication for custom structural components, architectural details, and specialized shielding built to precise specifications."
+        path="/steel-fabrication"
+        schema={buildServiceSchema('Steel Fabrication', '/steel-fabrication')}
+      />
       <section className="relative pt-20 pb-24 lg:pt-32 lg:pb-32 text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div initial="hidden" animate="visible" variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 }}}} className="max-w-4xl mx-auto">

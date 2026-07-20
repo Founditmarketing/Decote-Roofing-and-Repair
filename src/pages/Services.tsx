@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { Home, Building2, Hammer, Factory, CheckCircle2, ArrowRight } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { cn } from '../utils/cn';
+import PageSEO from '../components/PageSEO';
 
 export default function ServicesPage() {
   const services = [
@@ -74,6 +75,11 @@ export default function ServicesPage() {
 
   return (
     <div className="bg-[#050505] min-h-screen text-white overflow-hidden py-32">
+      <PageSEO
+        title="Roofing Services | Ducote Roofing & Repair — Alexandria, LA"
+        description="Explore Ducote Roofing & Repair's full service lineup: residential and commercial roofing, metal systems, siding, gutters, and custom steel fabrication."
+        path="/services"
+      />
       {/* Premium Hero Section */}
       <section className="relative pt-20 pb-24 lg:pt-32 lg:pb-32">
         <div className="absolute inset-0 z-0">

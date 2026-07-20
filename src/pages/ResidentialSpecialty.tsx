@@ -2,6 +2,8 @@ import { motion } from 'motion/react';
 import { Home, ShieldCheck, Wrench, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { cn } from '../utils/cn';
+import PageSEO from '../components/PageSEO';
+import { buildServiceSchema } from '../lib/business';
 
 export default function ResidentialSpecialtyPage() {
   const textRevealVariants = {
@@ -11,6 +13,12 @@ export default function ResidentialSpecialtyPage() {
 
   return (
     <div className="bg-[#050505] min-h-screen text-white overflow-hidden py-32">
+      <PageSEO
+        title="Residential Roofing Specialty | Ducote Roofing & Repair"
+        description="Bespoke residential roofing solutions in Alexandria, LA, blending premium materials with precision craftsmanship for lasting protection."
+        path="/residential-specialty"
+        schema={buildServiceSchema('Residential Roofing', '/residential-specialty')}
+      />
       <section className="relative pt-20 pb-24 lg:pt-32 lg:pb-32 text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div initial="hidden" animate="visible" variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 }}}} className="max-w-4xl mx-auto">

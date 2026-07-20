@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ZoomIn, Maximize2 } from 'lucide-react';
 import { cn } from '../utils/cn';
+import PageSEO from '../components/PageSEO';
 
 const categories = ['All', 'Residential', 'Commercial', 'Metal', 'Custom'];
 
@@ -35,6 +36,11 @@ export default function GalleryPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#050505] text-white">
+      <PageSEO
+        title="Project Gallery | Ducote Roofing & Repair — Alexandria, LA"
+        description="Browse completed residential, commercial, metal, and custom roofing projects by Ducote Roofing & Repair in Alexandria, Louisiana."
+        path="/gallery"
+      />
       {/* Premium Hero Section */}
       <section className="relative pt-40 pb-24 lg:pt-48 lg:pb-32 overflow-hidden">
         <div className="absolute inset-0 z-0">

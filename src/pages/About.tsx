@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Users, Target, ShieldCheck, Award, Wrench } from 'lucide-react';
 import { cn } from '../utils/cn';
+import PageSEO from '../components/PageSEO';
 
 export default function AboutPage() {
   const staggerContainer = {
@@ -15,6 +16,11 @@ export default function AboutPage() {
 
   return (
     <div className="bg-[#050505] min-h-screen text-white overflow-hidden py-32">
+      <PageSEO
+        title="About Us | Ducote Roofing & Repair — Alexandria, LA"
+        description="Founded in 2012, Ducote Roofing & Repair is Central Louisiana's trusted roofing contractor, delivering precision craftsmanship and structural integrity."
+        path="/about"
+      />
       {/* Premium Hero Section */}
       <section className="relative pt-20 pb-24 lg:pt-32 lg:pb-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
